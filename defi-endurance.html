@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Défi Endurance — CrossFit Hygie</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rouge: #B52D1E;
+    --rouge-dark: #8C1F13;
+    --noir: #0D0D0D;
+    --beige: #F2EDE8;
+    --beige2: #E0D9D2;
+    --gris: #4A4A4A;
+    --gris-l: #888888;
+    --blanc: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--beige);
+    color: var(--noir);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--noir);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 6vw 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--rouge);
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 20vw, 260px);
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .hero-eyebrow span {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gris-l);
+  }
+
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--rouge);
+    flex-shrink: 0;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 120px);
+    line-height: 0.92;
+    color: var(--blanc);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  .hero-title .accent { color: var(--rouge); }
+
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    font-weight: 300;
+    color: #AAAAAA;
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.45s;
+  }
+
+  .stat {
+    padding: 20px 28px;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .stat:first-child { border-left: none; padding-left: 0; }
+
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--blanc);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-val .unit {
+    font-size: 20px;
+    color: var(--rouge);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gris-l);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .hero-cta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.55s;
+  }
+
+  .btn-primary {
+    background: var(--rouge);
+    color: var(--blanc);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+
+  .btn-primary:hover { background: var(--rouge-dark); transform: translateY(-1px); }
+  .btn-primary:hover::after { transform: translateX(0); }
+
+  .hero-note {
+    font-size: 12px;
+    color: var(--gris-l);
+    font-weight: 300;
+  }
+
+  /* ── URGENCY BAR ── */
+  .urgency {
+    background: var(--rouge);
+    padding: 14px 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .urgency-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blanc);
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  .urgency-text span { opacity: 0.8; font-weight: 400; }
+
+  /* ── SECTION BASE ── */
+  .section {
+    padding: 80px 6vw;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1;
+    color: var(--noir);
+    margin-bottom: 24px;
+  }
+
+  /* ── CONCEPT ── */
+  .concept {
+    background: var(--beige);
+  }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1100px;
+  }
+
+  @media (max-width: 768px) {
+    .concept-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .concept-text p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--gris);
+    margin-bottom: 20px;
+  }
+
+  .concept-text strong { color: var(--noir); font-weight: 600; }
+
+  .concept-highlight {
+    background: var(--noir);
+    padding: 28px 32px;
+    margin-top: 8px;
+  }
+
+  .concept-highlight p {
+    font-size: 15px;
+    color: #CCCCCC;
+    line-height: 1.7;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .concept-highlight strong { color: var(--blanc); }
+
+  .niveaux {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .niveau-card {
+    background: var(--blanc);
+    padding: 24px 28px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+
+  .niveau-card:hover {
+    border-left-color: var(--rouge);
+    transform: translateX(4px);
+  }
+
+  .niveau-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 8px;
+  }
+
+  .niveau-card p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--gris);
+    line-height: 1.6;
+  }
+
+  /* ── PROGRAMME ── */
+  .programme {
+    background: var(--noir);
+  }
+
+  .programme .section-title { color: var(--blanc); }
+  .programme .section-label { color: var(--rouge); }
+
+  .programme-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: #888;
+    margin-bottom: 48px;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  .semaines {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .semaines { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 500px) {
+    .semaines { grid-template-columns: 1fr; }
+  }
+
+  .semaine-card {
+    background: rgba(255,255,255,0.04);
+    padding: 28px 24px;
+    position: relative;
+    transition: background 0.2s;
+    border-top: 2px solid transparent;
+  }
+
+  .semaine-card:hover { background: rgba(255,255,255,0.07); }
+
+  .semaine-card.special { border-top-color: var(--rouge); }
+
+  .semaine-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .semaine-card.special .semaine-num { color: rgba(181,45,30,0.3); }
+
+  .semaine-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 8px;
+  }
+
+  .semaine-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: #888;
+    line-height: 1.55;
+  }
+
+  /* ── PERSONNALISATION ── */
+  .perso {
+    background: var(--beige2);
+  }
+
+  .perso-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    max-width: 1100px;
+  }
+
+  @media (max-width: 768px) {
+    .perso-grid { grid-template-columns: 1fr; }
+  }
+
+  .formule-box {
+    background: var(--noir);
+    padding: 40px;
+  }
+
+  .formule-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--blanc);
+    margin-bottom: 24px;
+  }
+
+  .formule-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    background: var(--rouge);
+    color: var(--blanc);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content p {
+    font-size: 13px;
+    font-weight: 300;
+    color: #AAAAAA;
+    line-height: 1.6;
+  }
+
+  .step-content strong { color: var(--blanc); font-weight: 500; }
+
+  .zones-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 8px;
+  }
+
+  .zone-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--blanc);
+  }
+
+  .zone-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--rouge);
+    width: 36px;
+    flex-shrink: 0;
+  }
+
+  .zone-info h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--noir);
+    margin-bottom: 3px;
+  }
+
+  .zone-info p {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--gris-l);
+  }
+
+  .zone-allure {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--gris-l);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  /* ── INCLUS ── */
+  .inclus {
+    background: var(--beige);
+  }
+
+  .inclus-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 900px) {
+    .inclus-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 500px) {
+    .inclus-grid { grid-template-columns: 1fr; }
+  }
+
+  .inclus-card {
+    background: var(--blanc);
+    padding: 32px 28px;
+    border-top: 3px solid var(--beige2);
+    transition: border-color 0.2s;
+  }
+
+  .inclus-card:hover { border-top-color: var(--rouge); }
+
+  .inclus-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .inclus-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--noir);
+    margin-bottom: 10px;
+  }
+
+  .inclus-card p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gris);
+    line-height: 1.6;
+  }
+
+  /* ── PRIX ── */
+  .prix {
+    background: var(--noir);
+    text-align: center;
+  }
+
+  .prix .section-title { color: var(--blanc); }
+  .prix .section-label { color: var(--rouge); }
+
+  .prix-box {
+    max-width: 480px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 52px 48px;
+    position: relative;
+  }
+
+  .prix-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--rouge);
+  }
+
+  .prix-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 96px;
+    color: var(--blanc);
+    line-height: 1;
+    display: block;
+  }
+
+  .prix-amount .currency {
+    font-size: 40px;
+    color: var(--rouge);
+    vertical-align: top;
+    margin-top: 16px;
+    display: inline-block;
+  }
+
+  .prix-period {
+    font-size: 13px;
+    color: #666;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: block;
+  }
+
+  .prix-items {
+    list-style: none;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .prix-items li {
+    font-size: 14px;
+    font-weight: 300;
+    color: #AAAAAA;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .prix-items li::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--rouge);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prix-items li:last-child { border-bottom: none; }
+
+  .prix-note {
+    font-size: 12px;
+    color: #555;
+    margin-top: 20px;
+    font-style: italic;
+  }
+
+  /* ── CALENDRIER ── */
+  .calendrier {
+    background: var(--beige2);
+  }
+
+  .dates-list {
+    max-width: 600px;
+    margin-top: 40px;
+  }
+
+  .date-row {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .date-row:last-child { border-bottom: none; }
+
+  .date-when {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--rouge);
+    min-width: 140px;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+
+  .date-what h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--noir);
+    margin-bottom: 4px;
+  }
+
+  .date-what p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gris-l);
+    line-height: 1.5;
+  }
+
+  /* ── INSCRIPTION ── */
+  .inscription {
+    background: var(--rouge);
+    text-align: center;
+    padding: 80px 6vw;
+  }
+
+  .inscription .section-title {
+    color: var(--blanc);
+    margin-bottom: 16px;
+  }
+
+  .inscription p {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 40px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.65;
+  }
+
+  .btn-blanc {
+    background: var(--blanc);
+    color: var(--rouge);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-blanc:hover {
+    background: var(--beige);
+    transform: translateY(-2px);
+  }
+
+  .inscription-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 20px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--noir);
+    padding: 28px 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: #444;
+    font-weight: 300;
+  }
+
+  footer a {
+    font-size: 12px;
+    color: var(--rouge);
+    text-decoration: none;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">RUN</div>
+  <div class="hero-eyebrow">
+    <div class="dot"></div>
+    <span>CrossFit Hygie · Seclin</span>
+    <div class="dot"></div>
+    <span>Programme run · Avril 2025</span>
+  </div>
+  <h1 class="hero-title">
+    LE DÉFI<br><span class="accent">ENDURANCE</span>
+  </h1>
+  <p class="hero-sub">
+    8 semaines. Des allures calculées pour toi. Pas pour tout le monde — pour toi.
+    Débutant ou confirmé, tu travailles à ton niveau.
+  </p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-val">8<span class="unit">sem</span></span>
+      <span class="stat-label">Programme</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">1</span>
+      <span class="stat-label">Séance / semaine</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">100<span class="unit">%</span></span>
+      <span class="stat-label">Personnalisé</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">79<span class="unit">€</span></span>
+      <span class="stat-label">Tout inclus</span>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="https://forms.google.com/LIEN_FORM_ICI" class="btn-primary">Je m'inscris</a>
+    <span class="hero-note">Inscriptions jusqu'au mercredi 26 mars</span>
+  </div>
+</section>
+
+<!-- URGENCY -->
+<div class="urgency">
+  <div class="urgency-text">
+    🗓 Premier Cooper : <strong>mercredi 2 avril à 16h</strong> &nbsp;·&nbsp; <span>Inscriptions ouvertes jusqu'au 26 mars</span>
+  </div>
+</div>
+
+<!-- CONCEPT -->
+<section class="section concept">
+  <div class="concept-grid">
+    <div class="concept-text reveal">
+      <span class="section-label">Le principe</span>
+      <h2 class="section-title">Ton allure.<br>Pas celle<br>des autres.</h2>
+      <p>La plupart des programmes run te donnent une allure. La même pour tout le monde. <strong>6 min/km.</strong> Sauf que 6 min/km pour certains c'est une balade, pour d'autres c'est la mort.</p>
+      <p>Ici c'est l'inverse. Semaine 1 tu fais un test Cooper. Depuis ta distance, on calcule ta VO2max, ta VMA, et tes 3 allures de travail. <strong>C'est les tiennes. Personne d'autre n'a les mêmes chiffres.</strong></p>
+      <div class="concept-highlight">
+        <p>Semaine 8, on refait le Cooper. Tu compares ta distance avec S1. <strong>Ta progression est en mètres, pas en ressenti.</strong></p>
+      </div>
+    </div>
+    <div class="niveaux reveal">
+      <div class="niveau-card">
+        <h3>Tu débutes la course à pied</h3>
+        <p>Tu travailles à ton niveau, tu progresses sans te blesser. Tes allures sont adaptées à là où tu en es.</p>
+      </div>
+      <div class="niveau-card">
+        <h3>Tu cours déjà</h3>
+        <p>Tu découvres tes vraies zones d'effort et tu arrêtes de tout faire à la même allure. C'est là que la progression s'accélère.</p>
+      </div>
+      <div class="niveau-card">
+        <h3>Tu es un bon coureur</h3>
+        <p>Tu as des données précises pour pousser là où tu en as besoin. Chaque séance a un objectif clair.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section class="section programme">
+  <span class="section-label">Les 8 semaines</span>
+  <h2 class="section-title reveal" style="color:white">Le programme</h2>
+  <p class="programme-sub reveal">Une progression logique : construire la base, introduire l'intensité, pousser les limites, mesurer.</p>
+  <div class="semaines">
+    <div class="semaine-card special reveal">
+      <div class="semaine-num">01</div>
+      <div class="semaine-name">Test Cooper</div>
+      <div class="semaine-desc">12 minutes de course. Ta distance devient ta référence. Tes allures personnalisées arrivent dans les 48h.</div>
+    </div>
+    <div class="semaine-card reveal">
+      <div class="semaine-num">02</div>
+      <div class="semaine-name">Base aérobie</div>
+      <div class="semaine-desc">4 × 8 min à allure Z2. Construire le moteur. L'effort doit sembler facile — c'est voulu.</div>
+    </div>
+    <div class="semaine-card reveal">
+      <div class="semaine-num">03</div>
+      <div class="semaine-name">Volume long</div>
+      <div class="semaine-desc">35 min continus à allure Z2. Première sortie longue. Rythme constant du début à la fin.</div>
+    </div>
+    <div class="semaine-card reveal">
+      <div class="semaine-num">04</div>
+      <div class="semaine-name">Intervalles courts</div>
+      <div class="semaine-desc">10 × 1 min à allure Z4. Premier choc intensité. Stimuler la VO2max.</div>
+    </div>
+    <div class="semaine-card reveal">
+      <div class="semaine-num">05</div>
+      <div class="semaine-name">Tempo</div>
+      <div class="semaine-desc">3 × 10 min à allure Z3. L'allure inconfortable mais tenable. Le seuil anaérobie recule.</div>
+    </div>
+    <div class="semaine-card reveal">
+      <div class="semaine-num">06</div>
+      <div class="semaine-name">Intervalles longs</div>
+      <div class="semaine-desc">5 × 4 min à allure Z4. Plus dur que S4 — même intensité, effort plus long.</div>
+    </div>
+    <div class="semaine-card reveal">
+      <div class="semaine-num">07</div>
+      <div class="semaine-name">Pic d'intensité</div>
+      <div class="semaine-desc">3 × 1km en Z4 + finisher 10 min en Z3. La séance la plus dure. Tête autant que jambes.</div>
+    </div>
+    <div class="semaine-card special reveal">
+      <div class="semaine-num">08</div>
+      <div class="semaine-name">Test Cooper final</div>
+      <div class="semaine-desc">Même protocole que S1. Tu vois ta progression en mètres. Noir sur blanc.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONNALISATION -->
+<section class="section perso">
+  <div class="perso-grid">
+    <div class="reveal">
+      <span class="section-label">Comment ça marche</span>
+      <h2 class="section-title">Tes allures,<br>calculées<br>pour toi</h2>
+      <p style="font-size:15px;font-weight:300;color:var(--gris);line-height:1.75;margin-bottom:32px;">
+        Depuis ta distance Cooper, on calcule ta VMA puis tes 3 zones de travail. Tu reçois ton tableau personnalisé dans les 48h après S1. Garde-le sur ton téléphone — il te suit sur toutes les séances.
+      </p>
+      <div class="zones-list">
+        <div class="zone-row">
+          <div class="zone-badge">Z2</div>
+          <div class="zone-info">
+            <h4>Aérobie</h4>
+            <p>Tu peux tenir une conversation. Effort 5-6/10.</p>
+          </div>
+          <div class="zone-allure">Séances longues</div>
+        </div>
+        <div class="zone-row">
+          <div class="zone-badge">Z3</div>
+          <div class="zone-info">
+            <h4>Tempo</h4>
+            <p>Quelques mots seulement. Effort 7/10.</p>
+          </div>
+          <div class="zone-allure">Séances seuil</div>
+        </div>
+        <div class="zone-row">
+          <div class="zone-badge">Z4</div>
+          <div class="zone-info">
+            <h4>Seuil</h4>
+            <p>Difficile de parler. Effort 8-9/10.</p>
+          </div>
+          <div class="zone-allure">Intervalles</div>
+        </div>
+      </div>
+    </div>
+    <div class="formule-box reveal">
+      <h3>La formule</h3>
+      <div class="formule-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <p><strong>Test Cooper S1</strong><br>Tu cours 12 minutes. On note ta distance en mètres.</p>
+        </div>
+      </div>
+      <div class="formule-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <p><strong>Calcul VO2max + VMA</strong><br>VO2max = (distance − 504,9) ÷ 44,73<br>VMA = VO2max ÷ 3,5</p>
+        </div>
+      </div>
+      <div class="formule-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <p><strong>Tableau personnalisé</strong><br>Tu reçois tes allures Z2, Z3 et Z4 en min/km dans les 48h.</p>
+        </div>
+      </div>
+      <div class="formule-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <p><strong>Tu t'entraînes à TES allures</strong><br>Chaque séance indique une zone. Tu consultes ton tableau. Tu cours à ton niveau.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUS -->
+<section class="section inclus">
+  <span class="section-label reveal">Ce qui est inclus</span>
+  <h2 class="section-title reveal">Tout ce<br>qu'il te faut</h2>
+  <div class="inclus-grid">
+    <div class="inclus-card reveal">
+      <span class="inclus-icon">📄</span>
+      <h3>Programme PDF</h3>
+      <p>Le programme complet — intro, objectifs, FAQ et une page par séance. Tout est expliqué.</p>
+    </div>
+    <div class="inclus-card reveal">
+      <span class="inclus-icon">📊</span>
+      <h3>Tableau d'allures</h3>
+      <p>Ton tableau personnalisé Z2/Z3/Z4 calculé depuis ton Cooper S1. Personne d'autre n'a les mêmes.</p>
+    </div>
+    <div class="inclus-card reveal">
+      <span class="inclus-icon">👥</span>
+      <h3>Créneau coaché</h3>
+      <p>Chaque mercredi à 16h pour faire la séance ensemble. Ou en autonomie si ce créneau ne te convient pas.</p>
+    </div>
+    <div class="inclus-card reveal">
+      <span class="inclus-icon">👕</span>
+      <h3>T-shirt exclusif</h3>
+      <p>Pour ceux qui vont au bout des 8 semaines. Il se mérite.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRIX -->
+<section class="section prix">
+  <span class="section-label">Tarif</span>
+  <h2 class="section-title reveal">Simple.</h2>
+  <div class="prix-box reveal">
+    <span class="prix-amount"><span class="currency">€</span>79</span>
+    <span class="prix-period">pour les 8 semaines complètes</span>
+    <ul class="prix-items">
+      <li>Programme PDF complet (11 pages)</li>
+      <li>Tableau d'allures personnalisées</li>
+      <li>Créneau coaché mercredi 16h</li>
+      <li>Groupe WhatsApp privé</li>
+      <li>T-shirt exclusif si tu complètes le défi</li>
+    </ul>
+    <a href="https://forms.google.com/LIEN_FORM_ICI" class="btn-primary" style="width:100%;text-align:center;display:block;">Je m'inscris maintenant</a>
+    <p class="prix-note">Inscriptions jusqu'au mercredi 26 mars · Places limitées</p>
+  </div>
+</section>
+
+<!-- CALENDRIER -->
+<section class="section calendrier">
+  <span class="section-label">Dates clés</span>
+  <h2 class="section-title reveal">Le calendrier</h2>
+  <div class="dates-list">
+    <div class="date-row reveal">
+      <div class="date-when">Jusqu'au<br>26 mars</div>
+      <div class="date-what">
+        <h4>Inscriptions ouvertes</h4>
+        <p>Réponds à ce message ou remplis le formulaire en ligne.</p>
+      </div>
+    </div>
+    <div class="date-row reveal">
+      <div class="date-when">Mer. 2 avril<br>16h</div>
+      <div class="date-what">
+        <h4>S1 — Test Cooper initial</h4>
+        <p>12 minutes de course. Ta référence de départ.</p>
+      </div>
+    </div>
+    <div class="date-row reveal">
+      <div class="date-when">Dans les 48h</div>
+      <div class="date-what">
+        <h4>Réception de ton tableau d'allures</h4>
+        <p>Tes zones Z2, Z3 et Z4 personnalisées par WhatsApp.</p>
+      </div>
+    </div>
+    <div class="date-row reveal">
+      <div class="date-when">Mer. 9 avril<br>→ 21 mai</div>
+      <div class="date-what">
+        <h4>S2 à S7 — Le programme</h4>
+        <p>Un créneau chaque mercredi à 16h. Ou en autonomie dans la semaine.</p>
+      </div>
+    </div>
+    <div class="date-row reveal">
+      <div class="date-when">Mer. 28 mai<br>16h</div>
+      <div class="date-what">
+        <h4>S8 — Test Cooper final</h4>
+        <p>Même protocole. Tu vois ta progression en mètres.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="inscription">
+  <h2 class="section-title reveal">Prêt à te lancer ?</h2>
+  <p>Inscriptions jusqu'au <strong>mercredi 26 mars</strong>. Premier Cooper le <strong>2 avril à 16h</strong>.</p>
+  <a href="https://forms.google.com/LIEN_FORM_ICI" class="btn-blanc">Je m'inscris au Défi Endurance</a>
+  <p class="inscription-note">Questions ? Réponds directement à ce message ou parle-en en box.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© CrossFit Hygie · Seclin · <a href="https://www.crossfit-hygie.fr">crossfit-hygie.fr</a></p>
+  <p>Le Défi Endurance · Programme run 8 semaines</p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
